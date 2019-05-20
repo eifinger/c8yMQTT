@@ -1,6 +1,6 @@
 FROM python:3.7.3-slim-stretch
 
-RUN apt-get update && apt-get install ca-certificates build-essential
+RUN apt-get update && apt-get install -y ca-certificates build-essential
 
 WORKDIR /usr/src/app
 COPY requirements.txt .
