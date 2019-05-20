@@ -152,8 +152,10 @@ class C8yMQTT(object):
         self.client.on_connect = self.on_connect
         self.client.on_subscribe = self.on_subscribe
         self.client.on_log = self.on_log
-        if self.tls:
-            self.client.tls_set(self.cacert)
+        if self.trust_self_signed_cert:
+            self.client.set_tls(cert_reqs=ssl.CERT_NONE)
+        elif self.tls:
+            self.client.tls_set(self.cacert) 
         self.client.connect(self.mqtthost, self.mqttport)
         self.client.loop_start()
         self.client.subscribe("s/dcr")
