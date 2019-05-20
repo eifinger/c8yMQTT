@@ -9,6 +9,5 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY c8yMQTT.py .
 COPY pcAgent.py .
-COPY pc.properties .
 
 CMD [ "python", "./pcAgent.py" ]
