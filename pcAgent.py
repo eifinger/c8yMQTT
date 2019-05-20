@@ -38,6 +38,7 @@ c8y = C8yMQTT(config.get('device','host'),
                int(config.get('device','port')),
                config.getboolean('device','tls'),
                config.get('device','cacert'),
+               config.get('device', 'trust_self_signed_cert'),
                loglevel=logging.getLevelName(config.get('device', 'loglevel')))
 
 

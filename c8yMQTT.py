@@ -23,7 +23,7 @@ class C8yMQTT(object):
     '''
     
     
-    def __init__(self,mqtthost,mqttport, tls , cacert,loglevel=logging.INFO):
+    def __init__(self,mqtthost,mqttport, tls, cacert, trust_self_signed_cert=False, loglevel=logging.INFO):
         '''
         Read Configuration file
         Connect to configured tenant
@@ -41,6 +41,7 @@ class C8yMQTT(object):
         self.mqttport = mqttport
         self.cacert = cacert
         self.tls = tls
+        self.trust_self_signed_cert = trust_self_signed_cert
         
         if not os.path.exists(self.configFile):
             self.initialized = False
@@ -89,7 +90,9 @@ class C8yMQTT(object):
             self.logger.error('Not initialized, please call registerDevice() of edit c8y.properties file')
             return
         self.client = mqtt.Client(client_id=self.clientId)
-        if self.tls:
+        if self.trust_self_signed_cert:
+            self.client.set_tls(cert_reqs=ssl.CERT_NONE)
+        elif self.tls:
             self.client.tls_set(self.cacert) 
         self.client.username_pw_set(self.tenant+'/'+ self.user, self.password)
         self.client.on_message = on_message
