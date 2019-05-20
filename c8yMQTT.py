@@ -91,7 +91,7 @@ class C8yMQTT(object):
             return
         self.client = mqtt.Client(client_id=self.clientId)
         if self.trust_self_signed_cert:
-            self.client.set_tls(cert_reqs=ssl.CERT_NONE)
+            self.client.tls_set(cert_reqs=ssl.CERT_NONE)
         elif self.tls:
             self.client.tls_set(self.cacert) 
         self.client.username_pw_set(self.tenant+'/'+ self.user, self.password)
@@ -153,7 +153,7 @@ class C8yMQTT(object):
         self.client.on_subscribe = self.on_subscribe
         self.client.on_log = self.on_log
         if self.trust_self_signed_cert:
-            self.client.set_tls(cert_reqs=ssl.CERT_NONE)
+            self.client.tls_set(cert_reqs=ssl.CERT_NONE)
         elif self.tls:
             self.client.tls_set(self.cacert) 
         self.client.connect(self.mqtthost, self.mqttport)
