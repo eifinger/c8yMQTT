@@ -102,3 +102,8 @@ docker run -it -v $PWD:/usr/src/app pcagent
 
 Run - Raspberry Pi:
 docker run -it -v $PWD:/usr/src/app --privileged=true piagent
+
+### Docker Quickstart
+
+PC:
+docker run -v $PWD/c8y.properties:/usr/src/app/c8y.properties -v $PWD/pc.properties:/usr/src/app/pc.properties --name c8ymqtt -d eifinger/cy8mqtt:latest
