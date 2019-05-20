@@ -20,7 +20,7 @@ import platform
 import psutil
 
 
-config_file = 'pi.properties'
+config_file = 'pc.properties'
 
 #Configure Serial will be used for device Registration.
 serial = '0123456789'
@@ -45,6 +45,7 @@ def sendCPULoad():
     tempString = "995,," + str(psutil.cpu_percent())
     c8y.logger.debug("Sending CPULoad: " + tempString)
     c8y.publish("s/uc/pi", tempString)
+
 
 def sendMemory():
     tempString = "996,," +  str(psutil.virtual_memory().total >> 20) + "," + str(psutil.virtual_memory().available >> 20) + "," + str(psutil.swap_memory().total >> 20)
